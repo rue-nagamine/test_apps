@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="1" tests="12" time="0.449" timestamp="2026-09-14T13:51:51.550641+09:00" hostname="RUE-MN103.local"><testcase classname="tests.test_api" name="test_rejects_room_with_zero_capacity" time="0.014" /><testcase classname="tests.test_api" name="test_creates_and_lists_reservations" time="0.009" /><testcase classname="tests.test_booking" name="test_rejects_overlapping_reservation" time="0.000" /><testcase classname="tests.test_booking" name="test_allows_back_to_back_reservation" time="0.000" /><testcase classname="tests.test_booking" name="test_rejects_over_capacity" time="0.000" /><testcase classname="tests.test_booking" name="test_allows_exact_capacity" time="0.001" /><testcase classname="tests.test_booking" name="test_rejects_outside_business_hours" time="0.001" /><testcase classname="tests.test_booking" name="test_allows_reservation_ending_at_closing_time" time="0.000" /><testcase classname="tests.test_booking" name="test_rejects_non_positive_duration[TC-RSV-009]" time="0.001" /><testcase classname="tests.test_booking" name="test_rejects_reservation_longer_than_four_hours" time="0.001"><failure message="Failed: DID NOT RAISE BookingError">def test_rejects_reservation_longer_than_four_hours():
+        """長時間の占有を防ぐため 4 時間を超える予約は受け付けない。
+    
+        ※ この上限はまだ booking.py に実装されていない。意図的に失敗させて、
+           台帳側で fail がどう出るかを確認するためのテスト。
+        """
+&gt;       with pytest.raises(BookingError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE BookingError
+
+tests/test_booking.py:91: Failed</failure></testcase><testcase classname="tests.test_booking" name="test_allows_same_slot_in_different_room" time="0.000"><skipped type="pytest.skip" message="仕様確認中">/Users/Kazuki_Nagamine/テストアプリ用API/tests/test_booking.py:95: 仕様確認中</skipped></testcase><testcase classname="tests.test_booking" name="test_rejects_cancel_after_deadline" time="0.001" /></testsuite></testsuites>

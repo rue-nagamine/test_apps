@@ -1,0 +1,145 @@
+# 予約まわりのテスト項目。
+# id は結果の紐づけキー。一度決めたら絶対に変えないこと。
+
+- id: TC-RSV-001
+  type: manual
+  category: 予約
+  level: integration
+  tags: [回帰, 正常系]
+  priority: high
+  title: 会議室を予約できる
+  steps:
+    - トップ画面を開く
+    - 「予約する」の会議室・件名・開始・終了・参加人数を入力する
+    - 予約ボタンを押す
+  expected: 予約一覧に追加され、「予約しました。」と緑色で表示される
+
+- id: TC-RSV-002
+  type: manual
+  category: 予約
+  level: integration
+  tags: [回帰, 正常系]
+  priority: medium
+  title: 予約一覧に日時・会議室・件名・人数が表示される
+  steps:
+    - 予約を1件作成する
+    - 予約一覧を確認する
+  expected: 作成した予約の日時・会議室名・件名・参加人数が1行で表示される
+
+- id: TC-RSV-003
+  type: auto
+  category: 予約
+  level: unit
+  tags: [回帰, 異常系]
+  priority: high
+  title: 時間帯が重複する予約は作成できない
+  auto_ref: test_booking::test_rejects_overlapping_reservation
+
+- id: TC-RSV-004
+  type: auto
+  category: 予約
+  level: unit
+  tags: [回帰, 境界値]
+  priority: high
+  title: 前の予約の終了時刻と同じ開始時刻なら予約できる
+  auto_ref: test_booking::test_allows_back_to_back_reservation
+
+- id: TC-RSV-005
+  type: auto
+  category: 予約
+  level: unit
+  tags: [回帰, 異常系]
+  priority: high
+  title: 定員を超える参加人数では予約できない
+  auto_ref: test_booking::test_rejects_over_capacity
+
+- id: TC-RSV-006
+  type: auto
+  category: 予約
+  level: unit
+  tags: [回帰, 境界値]
+  priority: medium
+  title: 参加人数が定員ちょうどなら予約できる
+  auto_ref: test_booking::test_allows_exact_capacity
+
+- id: TC-RSV-007
+  type: auto
+  category: 予約
+  level: unit
+  tags: [回帰, 異常系]
+  priority: high
+  title: "営業時間 9:00-20:00 の外にかかる予約はできない"
+  auto_ref: test_booking::test_rejects_outside_business_hours
+
+- id: TC-RSV-008
+  type: auto
+  category: 予約
+  level: unit
+  tags: [回帰, 境界値]
+  priority: medium
+  title: "終了時刻が営業終了ちょうど（20:00）なら予約できる"
+  auto_ref: test_booking::test_allows_reservation_ending_at_closing_time
+
+# auto_ref をあえて書いていない項目。台帳がテスト名に埋め込んだ ID を
+# 拾って突合できるかの確認用（突合の第3段階）。
+- id: TC-RSV-009
+  type: auto
+  category: 予約
+  level: unit
+  tags: [回帰, 異常系]
+  priority: high
+  title: 終了時刻が開始時刻以前の予約はできない
+
+- id: TC-RSV-010
+  type: auto
+  category: 予約
+  level: unit
+  tags: [異常系]
+  priority: low
+  title: 4時間を超える予約はできない
+  auto_ref: test_booking::test_rejects_reservation_longer_than_four_hours
+
+- id: TC-RSV-011
+  type: auto
+  category: 予約
+  level: unit
+  tags: [正常系]
+  priority: medium
+  title: 別の会議室なら同じ時間帯でも予約できる
+  auto_ref: test_booking::test_allows_same_slot_in_different_room
+
+- id: TC-RSV-012
+  type: manual
+  category: 予約
+  level: integration
+  tags: [回帰, 正常系]
+  priority: high
+  title: 開始1時間前より前ならキャンセルできる
+  steps:
+    - 開始まで2時間以上ある予約を作成する
+    - 予約一覧の「キャンセル」を押す
+  expected: 一覧から消え、「予約をキャンセルしました。」と表示される
+
+- id: TC-RSV-013
+  type: manual
+  category: 予約
+  level: integration
+  tags: [異常系]
+  priority: high
+  title: 開始1時間前を過ぎた予約はキャンセルできない
+  steps:
+    - 開始まで1時間を切っている予約を用意する
+    - 予約一覧の「キャンセル」を押す
+  expected: 一覧から消えず、「開始 1 時間前を過ぎた予約はキャンセルできません」と赤字で表示される
+
+- id: TC-RSV-014
+  type: manual
+  category: 予約
+  level: integration
+  tags: [異常系]
+  priority: medium
+  title: 定員を超える人数を入力するとエラーメッセージが出る
+  steps:
+    - 定員6名の会議室を選ぶ
+    - 参加人数に7を入力して予約ボタンを押す
+  expected: 予約されず、定員を超えている旨のメッセージが赤字で表示される

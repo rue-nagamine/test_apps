@@ -1,0 +1,14 @@
+version: 1
+
+cases:
+  format: auto
+  paths:
+    - testcases/**/*.yml
+
+results:
+  format: junit-xml
+  paths:
+    - reports/**/*.xml
+  ref:
+    template: "{classname}::{name}"
+    strip_package: tests

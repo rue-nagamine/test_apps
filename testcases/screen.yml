@@ -1,0 +1,70 @@
+# 画面まわりのテスト項目。すべて目視確認。
+
+- id: TC-UI-001
+  type: manual
+  category: 画面
+  level: e2e
+  tags: [回帰, 正常系]
+  priority: medium
+  title: トップ画面が表示される
+  steps:
+    - "http://localhost:8000 を開く"
+  expected: 「会議室を登録する」「予約する」「予約一覧」の3つのセクションが表示される
+
+- id: TC-UI-002
+  type: manual
+  category: 画面
+  level: e2e
+  tags: [回帰, 正常系]
+  priority: medium
+  title: 会議室セレクトに登録済みの会議室が並ぶ
+  steps:
+    - 会議室を2件登録する
+    - 「予約する」の会議室セレクトを開く
+  expected: 登録した2件が「名前（定員 N 名）」の形式で選択肢に並ぶ
+
+- id: TC-UI-003
+  type: manual
+  category: 画面
+  level: e2e
+  tags: [正常系]
+  priority: low
+  title: 予約成功時に完了メッセージが緑色で表示される
+  steps:
+    - 予約を1件作成する
+  expected: 「予約しました。」が緑色で表示される
+
+- id: TC-UI-004
+  type: manual
+  category: 画面
+  level: e2e
+  tags: [回帰, 正常系]
+  priority: medium
+  title: 予約一覧が開始時刻の昇順で並ぶ
+  steps:
+    - 16:00 開始の予約を作成する
+    - 続けて 9:30 開始の予約を作成する
+  expected: 一覧では 9:30 の予約が上、16:00 の予約が下に並ぶ
+
+- id: TC-UI-005
+  type: manual
+  category: 画面
+  level: e2e
+  tags: [異常系]
+  priority: medium
+  title: エラー時にメッセージが赤字で表示される
+  steps:
+    - 重複する時間帯で予約ボタンを押す
+  expected: 既存予約の時間帯と件名を含むメッセージが赤字で表示される
+
+- id: TC-UI-006
+  type: manual
+  category: 画面
+  level: e2e
+  tags: [回帰, 正常系]
+  priority: low
+  title: 画面をリロードしても登録内容が残っている
+  steps:
+    - 会議室と予約を登録する
+    - ブラウザをリロードする
+  expected: 会議室一覧・予約一覧の内容がリロード前と同じ

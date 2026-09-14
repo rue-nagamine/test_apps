@@ -1,0 +1,56 @@
+# 会議室まわりのテスト項目。
+
+- id: TC-ROOM-001
+  type: manual
+  category: 会議室
+  level: integration
+  tags: [回帰, 正常系]
+  priority: high
+  title: 会議室を登録できる
+  steps:
+    - トップ画面の「会議室を登録する」に名前と定員を入力する
+    - 登録ボタンを押す
+  expected: 会議室一覧に追加され、「会議室を登録しました。」と表示される
+
+- id: TC-ROOM-002
+  type: manual
+  category: 会議室
+  level: integration
+  tags: [回帰, 正常系]
+  priority: low
+  title: 会議室一覧が名前順に並ぶ
+  steps:
+    - 「第2会議室」「第1会議室」の順に登録する
+  expected: 一覧では「第1会議室」「第2会議室」の順に表示される
+
+- id: TC-ROOM-003
+  type: manual
+  category: 会議室
+  level: integration
+  tags: [異常系]
+  priority: medium
+  title: 同じ名前の会議室は登録できない
+  steps:
+    - 「第1会議室」を登録する
+    - もう一度「第1会議室」を登録する
+  expected: 登録されず、すでに登録されている旨のメッセージが赤字で表示される
+
+- id: TC-ROOM-004
+  type: manual
+  category: 会議室
+  level: integration
+  tags: [異常系]
+  priority: low
+  title: 会議室名を空欄にすると登録できない
+  steps:
+    - 名前を空欄のまま登録ボタンを押す
+  expected: 送信されず、ブラウザの必須入力エラーが表示される
+
+- id: TC-ROOM-005
+  type: auto
+  category: 会議室
+  level: integration
+  tags: [回帰, 異常系]
+  priority: medium
+  title: 定員0以下の会議室は登録できない
+  auto_ref: test_api::test_rejects_room_with_zero_capacity
