@@ -8,7 +8,7 @@
   priority: medium
   title: トップ画面が表示される
   steps:
-    - "http://localhost:8000 を開く"
+    - "http://localhost:8001 を開く"
   expected: 「会議室を登録する」「予約する」「予約一覧」の3つのセクションが表示される
 
 - id: TC-UI-002

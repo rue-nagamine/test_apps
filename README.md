@@ -22,10 +22,12 @@ reports/       pytest --junitxml の出力。コミットする
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
-.venv/bin/uvicorn app.main:app --reload
+.venv/bin/uvicorn app.main:app --reload --port 8001
 ```
 
-<http://localhost:8000> を開く。
+<http://localhost:8001> を開く。
+
+8000 番は「テスト実施台帳」側が使うので、こちらは 8001 番で動かす。
 
 ## テストする
 
