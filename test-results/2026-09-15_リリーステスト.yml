@@ -1,3 +1,4 @@
+schema_version: 1
 cycle:
   name: リリーステスト
   executor: 長嶺
@@ -12,6 +13,7 @@ cycle:
     対象コミット: 7fbeca1d
     実施者: 長嶺
     テストpush
+    2026/09/17
 summary:
   total: 25
   pass: 10
